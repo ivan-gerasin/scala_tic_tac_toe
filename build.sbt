@@ -6,7 +6,7 @@ lazy val app = (project in file("."))
     name := "TicTacToe"
   )
 
-lazy val tte_core = (project in file("simple_promt"))
+lazy val tte_core = (project in file("core"))
   .settings(
     name := "TTE_Core"
   )
@@ -16,3 +16,5 @@ lazy val simple_promt = (project in file("simple_promt"))
   .settings(
     name := "TTE_SimplePromt"
   )
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0" % "test"

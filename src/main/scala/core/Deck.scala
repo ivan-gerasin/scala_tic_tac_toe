@@ -3,14 +3,15 @@ package core
 import scala.collection.mutable.ArrayBuffer
 import core.Mark._
 
-class Deck(val deckSize: Int = 3) {
-  private val _deck: ArrayBuffer[ArrayBuffer[Mark]] = ArrayBuffer.fill(deckSize, deckSize)(Mark.Empty)
+class Deck(val size: Int = 3) {
+  private val _deck: ArrayBuffer[ArrayBuffer[Mark]] = ArrayBuffer.fill(size, size)(Mark.Empty)
 
-  private def fitSize(value: Int) = value < deckSize
+  private def fitSize(value: Int) = value < size
 
   private def update(row: Int, col: Int, value: Mark): Unit = {
     require(fitSize(row))
     require(fitSize(col))
+    require(value != Mark.Empty)
     _deck(row)(col) = value
   }
 
@@ -18,5 +19,5 @@ class Deck(val deckSize: Int = 3) {
 
   def get(row: Int, col: Int): Mark = _deck(row-1)(col-1)
 
-  def deckAsVector: Vector[Vector[Mark]] = _deck.map(_.toVector).toVector
+  def toVector: Vector[Vector[Mark]] = _deck.map(_.toVector).toVector
 }
