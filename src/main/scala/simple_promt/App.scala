@@ -3,6 +3,7 @@ package simple_promt
 import scala.io.StdIn.readLine
 
 import core._
+import simple_promt._
 
 object TTESimplePromt extends App {
     val deck = new Deck()
@@ -12,18 +13,25 @@ object TTESimplePromt extends App {
 
     val instance = new Game(List(cross_player, nought_player), deck)
 
+    val drawer = new DeckDrawer()
+
+    val printer = new NaiveConsolePrinter()
+
     while (!instance.gameEnded) {
-        print("\u001b[2J")
-        instance.print
-        print(s"${instance.player.name}> ")
+        printer.clrSrc()
+        printer.print(drawer.makeDeckView(deck))
+        printer.print(s"${instance.player.name}> ")
+
         val input = readLine().split(" ").map(_.toInt)
-        println("")
+
+        printer.newLine()
+
         instance.makeTurn(input(0), input(1))
     }
     if (instance.winner.isDefined) {
-        println(s"Winner is ${instance.winner.get.name}")
+        printer.printLn(s"Winner is ${instance.winner.get.name}")
     } else {
-        println("It's a tie!")
+        printer.printLn("It's a tie!")
     }
 
 }

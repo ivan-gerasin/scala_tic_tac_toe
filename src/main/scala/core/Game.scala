@@ -39,11 +39,6 @@ class Game(private val players: List[Player], val deck: Deck) {
     if (has_winner) Some(this.player) else None
   }
 
-  def print = {
-    val deck_view = deck.toVector
-    for (i <- deck_view.map(_.mkString("|")) ) yield println(i)
-  }
-
   private def noTurnAvailable: Boolean = currentTurn == scala.math.pow(deck.size, 2).toInt
 
   def gameTurn: Int = currentTurn + 1
