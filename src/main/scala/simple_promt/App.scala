@@ -10,12 +10,11 @@ object TTESimplePromt extends App {
 
     val cross_player = new Player("Cross", Mark.Cross)
     val nought_player = new Player("Nought", Mark.Nought)
-
     val instance = new Game(List(cross_player, nought_player), deck)
 
     val drawer = new DeckDrawer()
-
     val printer = new NaiveConsolePrinter()
+    val parser = new InputParser()
 
     while (!instance.gameEnded) {
         printer.clrSrc()
