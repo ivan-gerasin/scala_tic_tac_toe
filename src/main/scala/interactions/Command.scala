@@ -1,4 +1,4 @@
-package simple_promt.interactions
+package interactions
 
 object Command {
   def apply(cmd: String, rest: String = ""): String = f":${cmd} ${rest}"
@@ -13,16 +13,8 @@ object Command {
     } else None
 }
 
-abstract class CommandVariables
-
-abstract class Command(context: Option[Context] = None) {
-  protected val storedContext: Context = if (context.isDefined) context.get else null
-  abstract def execute(executionContext: Context = storedContext): CommandResult
+abstract class Command(val executionContext: Context) {
+  def execute(): CommandResult
   protected def success(payload: Any): SuccessCommandResult = CommandResult.success(payload)
   protected def fail(error: Throwable): FailedCommandResult = CommandResult.failed(error)
-
-  def setVars(cmdVars: CommandVariables): this.type = {
-    throw new NotImplementedError("Class does not support variables")
-    return this
-  }
 }

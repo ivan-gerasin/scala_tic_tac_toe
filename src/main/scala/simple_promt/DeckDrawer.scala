@@ -16,7 +16,7 @@ object DeckDrawer {
 }
 
 import DeckDrawer._
-class DeckDrawer(val markMap: MarkMap = classicMarks) {
+class DeckDrawer(val markMap: MarkMap = DeckDrawer.classicMarks) {
 
   private val verticalSeparator = "|"
 

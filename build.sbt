@@ -11,6 +11,11 @@ lazy val tte_core = (project in file("core"))
     name := "TTE_Core"
   )
 
+lazy val tte_interactions = (project in file("interactions"))
+  .settings(
+    name := "TTE_Interactions"
+  )
+
 lazy val simple_promt = (project in file("simple_promt"))
   .dependsOn(tte_core)
   .settings(

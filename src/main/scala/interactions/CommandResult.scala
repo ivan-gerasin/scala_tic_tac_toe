@@ -1,4 +1,4 @@
-package simple_promt.interactions
+package interactions
 
 object CommandResult {
   type Payload = Any
@@ -9,8 +9,9 @@ object CommandResult {
 import CommandResult.Payload
 
 abstract class CommandResult {
-  abstract val payload: Payload
-  abstract val isSuccessful: Boolean
+  val payload: Payload
+  val isSuccessful: Boolean
+  def isFailed: Boolean = !isSuccessful
 }
 
 class SuccessCommandResult private[interactions] (val payload: Payload = None) extends CommandResult {
