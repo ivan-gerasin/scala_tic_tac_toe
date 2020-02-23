@@ -1,3 +1,4 @@
+import core.Game
 import interactions.Context
 
 import scala.collection.mutable
@@ -25,4 +26,10 @@ class MockedContext extends Context {
   override def writeToSlot(filename: String, data: Serializable): Unit = {
     writeLog += (filename -> data)
   }
+
+  override def readSlot(slotId: SlotId): Game = ???
+
+  override def setCurrentGame(game: Game): Unit = ???
+
+  override def makeTurn(row: Int, col: Int): Unit = ???
 }

@@ -17,3 +17,4 @@ class CommandExceptions(msg: String) extends Exception(msg) {
 
 class InvalidSlotIdException(msg: String) extends CommandExceptions(msg)
 class SlotNotExistsException(msg: String) extends CommandExceptions(msg)
+class NoSuchCommand(msg: String) extends CommandExceptions(msg)

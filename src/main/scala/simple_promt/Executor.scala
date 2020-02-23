@@ -1,11 +1,11 @@
 package simple_promt
 
-import interactions.Context
-import interactions.commands.{ExitCommand, HelpCommand, LoadCommand, NewGameCommand, SaveCommand}
+import interactions.{Command, CommandResult, Context}
+import interactions.commands.{ExitCommand, HelpCommand, LoadCommand, MakeTurnCommand, NewGameCommand, SaveCommand, UnknownCommand}
 import simple_promt.UserInputString.CommandAndArgs
 
 class Executor(context: Context) {
-  def command(userCmdRequest: CommandAndArgs): Unit = {
+  private def createCommand(userCmdRequest: CommandAndArgs): Command = {
     val (cmd, arg) = userCmdRequest
     cmd match {
       case "new" => new NewGameCommand(context)
@@ -13,6 +13,15 @@ class Executor(context: Context) {
       case "load" => (new LoadCommand(context)).setSlotId(arg)
       case "help" => new HelpCommand(context)
       case "exit" => new ExitCommand(context)
+
+      case "turn" => (new MakeTurnCommand(context)).setArgs(arg)
+
+      case _ => (new UnknownCommand(context)).setWrongCmdName(cmd)
     }
+  }
+
+  def command(userCmdRequest: CommandAndArgs): CommandResult = {
+    val cmd = createCommand(userCmdRequest)
+    cmd.execute()
   }
 }
