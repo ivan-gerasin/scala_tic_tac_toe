@@ -1,18 +1,22 @@
 package interactions.commands
 
+import interactions.commands.exceptions.InvalidSlotIdException
 import interactions.{Command, CommandResult, Context}
 
 class SaveCommand(context: Context) extends Command(context) {
-  private var filename: String = ""
-  private def setFilename(name: String): Unit = filename = name
+  private var slotId: String = ""
+  def setSlotId(name: String): this.type = {
+    slotId = name
+    this
+  }
 
   override def execute(): CommandResult = {
-//    val filename = executionContext.readInput()
-    if (!isValidFilename) {
-      return fail(new IllegalArgumentException("Invalid filename"))
+
+    if (!isValidSlotId) {
+      return fail(new InvalidSlotIdException(s"Invalid slot id while trying to save: ${this.slotId}"))
     }
 
-    if (!this.isFileExists) {
+    if (this.isSlotEmpty) {
       return saveAttempt()
     }
 
@@ -28,11 +32,11 @@ class SaveCommand(context: Context) extends Command(context) {
     }
   }
 
-  private def isValidFilename: Boolean = {
-    filename.length > 0
+  private def isValidSlotId: Boolean = {
+    slotId.length > 0 // basically, slotId is a filename, probably will refactor in future
   }
 
-  private def isFileExists: Boolean = executionContext.isFileExists(filename)
+  private def isSlotEmpty: Boolean = executionContext.isSlotEmpty(slotId)
 
   private def saveAttempt(): CommandResult = {
     try {
@@ -43,10 +47,10 @@ class SaveCommand(context: Context) extends Command(context) {
     }
   }
 
-  private def save(): Unit = executionContext.writeToFile(filename, new Serializable {})
+  private def save(): Unit = executionContext.writeToSlot(slotId, new Serializable {})
 
   private def askForOverwrite(): CommandResult = {
-    val askForOverwriteMessage = f"${filename} already exists. Overwrite?"
+    val askForOverwriteMessage = f"${slotId} already exists. Overwrite?"
     new AskConfirmCommand(executionContext, askForOverwriteMessage).execute()
   }
 }

@@ -19,10 +19,10 @@ class MockedContext extends Context {
   override def terminate(exitCode: Int): Unit = print(s"=== App termination call === Code: ${exitCode}")
 
   var isFileExists: Boolean = true
-  override def isFileExists(filename: String): Boolean = isFileExists
+  override def isSlotEmpty(filename: String): Boolean = isFileExists
 
   val writeLog: mutable.Map[String, Serializable] = mutable.Map[String, Serializable]()
-  override def writeToFile(filename: String, data: Serializable): Unit = {
+  override def writeToSlot(filename: String, data: Serializable): Unit = {
     writeLog += (filename -> data)
   }
 }

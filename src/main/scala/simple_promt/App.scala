@@ -14,7 +14,7 @@ object TTESimplePromt extends App {
 
     val drawer = new DeckDrawer()
     val printer = new NaiveConsolePrinter()
-    val parser = new InputParser()
+    val parser = new CommandExtractor()
 
     while (!instance.gameEnded) {
         printer.clrSrc()
