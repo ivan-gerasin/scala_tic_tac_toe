@@ -1,4 +1,4 @@
-package simple_promt
+package simple_prompt
 
 import core.Game
 import interactions.Context

@@ -1,6 +1,6 @@
-package simple_promt
+package simple_prompt
 
-import simple_promt.UserInputString.CommandAndArgs
+import simple_prompt.UserInputString.CommandAndArgs
 
 object StringCommandExtractor {
   def parse(str: String): CommandAndArgs = {

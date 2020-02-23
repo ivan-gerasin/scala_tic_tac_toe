@@ -1,4 +1,4 @@
-package simple_promt
+package simple_prompt
 
 class NaiveConsolePrinter extends CLIPrinter {
   def print(str: String): Unit = Predef.print(str)

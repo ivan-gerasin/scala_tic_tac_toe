@@ -1,10 +1,10 @@
-package simple_promt
+package simple_prompt
 
 import scala.io.StdIn.readLine
 import core._
 import interactions.CommandResult
 import interactions.commands.ExitCommand
-import simple_promt._
+import simple_prompt._
 
 object TTESimplePrompt extends App {
 

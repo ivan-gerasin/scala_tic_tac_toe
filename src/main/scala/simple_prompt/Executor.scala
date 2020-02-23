@@ -1,8 +1,8 @@
-package simple_promt
+package simple_prompt
 
 import interactions.{Command, CommandResult, Context}
 import interactions.commands.{ExitCommand, HelpCommand, LoadCommand, MakeTurnCommand, NewGameCommand, SaveCommand, UnknownCommand}
-import simple_promt.UserInputString.CommandAndArgs
+import simple_prompt.UserInputString.CommandAndArgs
 
 class Executor(context: Context) {
   private def createCommand(userCmdRequest: CommandAndArgs): Command = {

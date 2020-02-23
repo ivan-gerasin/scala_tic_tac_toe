@@ -1,4 +1,4 @@
-package simple_promt
+package simple_prompt
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -17,7 +17,7 @@ class InputParserTest extends AnyFlatSpec with Matchers {
   }
 
   it should "throw error if there is no colon before command" in {
-    assertThrows[RuntimeException] {
+    assertThrows[InvalidCommandFormat] {
       StringCommandExtractor.parse("cmd arg1 arg2")
     }
   }
