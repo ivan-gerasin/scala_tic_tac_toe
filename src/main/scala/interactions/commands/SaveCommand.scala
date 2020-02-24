@@ -1,5 +1,6 @@
 package interactions.commands
 
+import core.Game
 import interactions.commands.exceptions.InvalidSlotIdException
 import interactions.{Command, CommandResult, Context}
 
@@ -10,7 +11,17 @@ class SaveCommand(context: Context) extends Command(context) {
     this
   }
 
+  private var gameInstance: Game = null
+  def setGameInstance(game: Game): this.type = {
+    gameInstance = game
+    this
+  }
+
   override def execute(): CommandResult = {
+
+    if (gameInstance == null) {
+      fail(new NullPointerException("SaveCommand: no game instance declared"))
+    }
 
     if (!isValidSlotId) {
       return fail(new InvalidSlotIdException(s"Invalid slot id while trying to save: ${this.slotId}"))
@@ -47,7 +58,7 @@ class SaveCommand(context: Context) extends Command(context) {
     }
   }
 
-  private def save(): Unit = executionContext.writeToSlot(slotId, new Serializable {})
+  private def save(): Unit = executionContext.writeToSlot(slotId, gameInstance)
 
   private def askForOverwrite(): CommandResult = {
     val askForOverwriteMessage = f"${slotId} already exists. Overwrite?"

@@ -24,8 +24,7 @@ class MockedContext extends Context {
 
   override def terminate(exitCode: Int): Unit = print(s"=== App termination call === Code: ${exitCode}")
 
-  var isSlotEmpty: Boolean = true
-  override def isSlotEmpty(filename: String): Boolean = isSlotEmpty
+  override def isSlotEmpty(filename: String): Boolean = false
 
   val writeLog: mutable.Map[String, Serializable] = mutable.Map[String, Serializable]()
   override def writeToSlot(filename: String, data: Serializable): Unit = {
@@ -33,19 +32,9 @@ class MockedContext extends Context {
   }
 
   var readSlotContainer = MockedContext.gameFactory()
-  private val readSlotCapacitor = ArrayBuffer[String]()
-  def readSlotCalls: List[String] = readSlotCapacitor.toList
-  def readSlotLastCall: String = readSlotCapacitor.last
-  override def readSlot(slotId: SlotId): Game = {
-    readSlotCapacitor.append(slotId)
-    readSlotContainer
-  }
+  override def readSlot(slotId: SlotId): Game = {readSlotContainer}
 
   override def setCurrentGame(game: Game): Unit = ???
 
-  private val makeTurnCapacitor = ArrayBuffer[(Int, Int)]()
-  def makeTurnLastCall: (Int, Int) = makeTurnCapacitor.last
-  override def makeTurn(row: Int, col: Int): Unit = {
-    makeTurnCapacitor.append((row, col))
-  }
+  override def makeTurn(row: Int, col: Int): Unit = {}
 }

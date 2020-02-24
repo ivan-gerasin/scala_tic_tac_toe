@@ -27,7 +27,6 @@ class LoadCommand(context: Context) extends Command(context) {
       case e: Exception => CommandResult.failed(e)
     }
 
-
   }
 
   private def isValidSlotId: Boolean = slotId.length > 0

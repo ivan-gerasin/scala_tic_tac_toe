@@ -14,8 +14,8 @@ class LoadCommandTest extends UnitTest {
   }
 
   it should "return SlotNotExistsException when slot(filename) is not exists" in {
-    val context = new MockedContext()
-    context.isSlotEmpty = true
+    val context = mock[MockedContext]
+    (context.isSlotEmpty _).expects("filename").returning(true)
     val cmd = new LoadCommand(context)
     cmd.setSlotId("filename")
     val result = cmd.execute()
@@ -24,13 +24,14 @@ class LoadCommandTest extends UnitTest {
   }
 
   it should "return Game instance in successful scenario" in {
-    val context = new MockedContext()
-    context.isSlotEmpty = false
+    val context = mock[MockedContext]
+    (context.isSlotEmpty _).expects("filename").returning(false)
+    (context.readSlot _).expects("filename").returning(context.readSlotContainer)
+
     val cmd = new LoadCommand(context)
     cmd.setSlotId("filename")
     val result = cmd.execute()
     assert(result.isSuccessful)
-    assert(context.readSlotLastCall == "filename")
     assert(result.payload.isInstanceOf[Game])
   }
 
