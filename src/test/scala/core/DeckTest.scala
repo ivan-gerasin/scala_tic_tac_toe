@@ -1,10 +1,7 @@
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.flatspec.AnyFlatSpec
-
 import core.Deck
 import core.Mark
 
-class DeckTest extends AnyFlatSpec with Matchers {
+class DeckTest extends UnitTest {
 
   "A Deck" should "have size 3 by default" in {
     val defaultDeck = new Deck()

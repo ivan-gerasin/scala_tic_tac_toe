@@ -1,8 +1,6 @@
 import interactions.commands.MakeTurnCommand
-import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers.should.Matchers
 
-class MakeTurnCommandTest extends AnyFlatSpec with Matchers  {
+class MakeTurnCommandTest extends UnitTest  {
   val context = new MockedContext()
 
   it should "throws IllegalArgumentException in setArgs is number of args is not equal 2" in {

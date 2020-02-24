@@ -17,13 +17,7 @@ object MockedContext {
 
 class MockedContext extends Context {
 
-  private val printCapacitor = ArrayBuffer[String]()
-  def lastPrinterCall: String = printCapacitor.last
-  def printerCalls: List[String] = printCapacitor.toList
-
-  override def printer(textToPrint: String): Unit = {
-    printCapacitor.append(textToPrint)
-  }
+  override def printer(textToPrint: String): Unit = {}
 
   var fakedInput: String = ""
   override def readInput(): String = fakedInput

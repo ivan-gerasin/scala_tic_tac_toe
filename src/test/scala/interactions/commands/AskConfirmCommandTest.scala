@@ -1,20 +1,18 @@
 import java.util.InputMismatchException
 
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.flatspec.AnyFlatSpec
 import interactions.{FailedCommandResult, SuccessCommandResult}
 import interactions.commands.{AskConfirmCommand, Confirm}
 
-class AskConfirmCommandTest extends AnyFlatSpec with Matchers {
+class AskConfirmCommandTest extends UnitTest{
 
   val context = new MockedContext()
   val confirmMsg = "Wish to proceed?"
 
   it should "print provided confirmation message" in {
+    val context = mock[MockedContext]
     val cmd = new AskConfirmCommand(context, confirmMsg)
+    (context.printer _).expects("Wish to proceed?")
     cmd.execute()
-
-    assert(context.lastPrinterCall == confirmMsg)
   }
 
   it should "return success result with CONFIRM value if user print 'yes'" in {

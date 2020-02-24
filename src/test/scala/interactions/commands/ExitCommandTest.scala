@@ -1,8 +1,6 @@
-import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers.should.Matchers
 import interactions.commands.{ExitCommand}
 
-class ExitCommandTest extends AnyFlatSpec with Matchers  {
+class ExitCommandTest extends UnitTest {
   val context = new MockedContext()
 
   it should "return ExitCommand.TERMINATOR on execution" in {

@@ -23,3 +23,4 @@ lazy val simple_promt = (project in file("simple_promt"))
   )
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0" % "test"
+libraryDependencies += "org.scalamock" %% "scalamock" % "4.4.0" % Test

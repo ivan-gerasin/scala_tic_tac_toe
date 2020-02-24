@@ -1,9 +1,6 @@
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.flatspec.AnyFlatSpec
-
 import core._
 
-class GameTest extends AnyFlatSpec with Matchers {
+class GameTest extends UnitTest {
 
   def fixture = new {
     val deck = new Deck()

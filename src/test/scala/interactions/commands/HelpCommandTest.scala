@@ -1,13 +1,12 @@
 import interactions.commands.HelpCommand
-import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers.should.Matchers
 
-class HelpCommandTest extends AnyFlatSpec with Matchers  {
-  val context = new MockedContext()
+class HelpCommandTest extends UnitTest {
 
   it should "call printer with some text" in {
+    val context = mock[MockedContext]
+    (context.printer _).expects("Some help text")
+
     val cmd = new HelpCommand(context)
     cmd.execute()
-    assert(context.printerCalls.nonEmpty)
   }
 }

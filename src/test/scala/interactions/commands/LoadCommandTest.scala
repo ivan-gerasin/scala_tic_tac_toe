@@ -1,10 +1,8 @@
 import core.Game
 import interactions.commands.LoadCommand
 import interactions.commands.exceptions.{InvalidSlotIdException, SlotNotExistsException}
-import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers.should.Matchers
 
-class LoadCommandTest extends AnyFlatSpec with Matchers  {
+class LoadCommandTest extends UnitTest {
 
   it should "return InvalidSlotIdException if slot(filename) is empty string" in {
     val context = new MockedContext()
