@@ -3,7 +3,8 @@ package core
 import scala.collection.mutable.ArrayBuffer
 import core.Mark._
 
-class Deck(val size: Int = 3) {
+@SerialVersionUID(1L)
+class Deck(val size: Int = 3) extends Serializable{
   private val _deck: ArrayBuffer[ArrayBuffer[Mark]] = ArrayBuffer.fill(size, size)(Mark.Empty)
 
   private def fitSize(value: Int) = value < size

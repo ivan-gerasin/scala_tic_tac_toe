@@ -2,4 +2,5 @@ package core
 
 import core.Mark._
 
-class Player(val name: String, val mark: Mark)
+@SerialVersionUID(1L)
+class Player(val name: String, val mark: Mark) extends Serializable

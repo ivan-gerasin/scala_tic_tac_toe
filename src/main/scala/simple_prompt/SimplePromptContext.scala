@@ -1,5 +1,8 @@
 package simple_prompt
 
+import java.io.{FileInputStream, FileOutputStream, ObjectInputStream, ObjectOutputStream}
+import java.nio.file.{Files, Paths}
+
 import core.Game
 import interactions.Context
 
@@ -22,11 +25,28 @@ class SimplePromptContext(printer: CLIPrinter) extends Context {
     System.exit(exitCode)
   }
 
-  override def isSlotEmpty(slotId: SlotId): Boolean = ???
+  override def isSlotEmpty(slotId: SlotId): Boolean = {
+    val savesDir = Paths.get("saves")
+    if (!Files.exists(savesDir)) {
+      Files.createDirectory(savesDir)
+    }
+    Files.exists(Paths.get(s"/tmp/${slotId}.tts"))
+  }
 
-  override def writeToSlot(slotId: SlotId, data: Serializable): Unit = ???
+  override def writeToSlot(slotId: SlotId, data: Serializable): Unit = {
+    val path = s"/saves/${slotId}.tts"
+    val file = new ObjectOutputStream(new FileOutputStream(path))
+    file.writeObject(data)
+    file.close()
+  }
 
-  override def readSlot(slotId: SlotId): Game = ???
+  override def readSlot(slotId: SlotId): Game = {
+    val path = s"/saves/${slotId}.tts"
+    val streamInput = new ObjectInputStream(new FileInputStream(path))
+    val game = streamInput.readObject.asInstanceOf[Game]
+    streamInput.close()
+    game
+  }
 
   override def setCurrentGame(game: Game): Unit = {
     currentGame = game

@@ -3,7 +3,8 @@ package core
 final class GameEndedException extends Exception
 final class CellOverrideException extends Exception
 
-class Game(private val players: List[Player], val deck: Deck) {
+@SerialVersionUID(1L)
+class Game(private val players: List[Player], val deck: Deck) extends Serializable {
   private var currentTurn: Int = 0
   private def nextTurn(): Unit = {
     this.currentTurn += 1

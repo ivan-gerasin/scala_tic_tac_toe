@@ -21,7 +21,13 @@ class LoadCommand(context: Context) extends Command(context) {
       return fail(new SlotNotExistsException(s"Slot with name ${this.slotId} is not exists or not found"))
     }
 
-    CommandResult.success(executionContext.readSlot(this.slotId))
+    try {
+      CommandResult.success(executionContext.readSlot(this.slotId))
+    } catch {
+      case e: Exception => CommandResult.failed(e)
+    }
+
+
   }
 
   private def isValidSlotId: Boolean = slotId.length > 0
